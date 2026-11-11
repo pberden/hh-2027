@@ -1,0 +1,59 @@
+---
+import "@fontsource/shrikhand/400.css";
+import "@fontsource/space-grotesk/400.css";
+import "@fontsource/space-grotesk/500.css";
+import "@fontsource/space-grotesk/700.css";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Joekskepèl D'n Heiten Haspel · Venlo",
+  description = "Joekskepèl D'n Heiten Haspel oet Venlo, sinds 2003. Net euver 't rendje, mer alzelaeve kei gezellig. Boek ós veur dien fees.",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/logo.png", Astro.site);
+---
+
+<!doctype html>
+<html lang="li">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="theme-color" content="#f2ff2e" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <script is:inline>
+      // Apply the saved trip speed before first paint to avoid a speed jump.
+      try {
+        const s = { mild: 2.6, vol: 1, overdosis: 0.35 }[localStorage.getItem("trip")];
+        if (s) document.documentElement.style.setProperty("--spd", String(s));
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <slot />
+
+    <div class="trip" role="group" aria-label="Trip-snelheid">
+      <span class="trip__label" aria-hidden="true">Trip</span>
+      <button type="button" data-trip="mild" aria-pressed="false">mild</button>
+      <button type="button" data-trip="vol" aria-pressed="true">vol</button>
+      <button type="button" data-trip="overdosis" aria-pressed="false">overdosis</button>
+    </div>
+
+    <script>
+      import "../scripts/trip";
+    </script>
+  </body>
+</html>

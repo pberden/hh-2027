@@ -1,0 +1,37 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "heitenhaspel",
+  "main": "worker/index.ts",
+  "compatibility_date": "2025-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Astro's static build. The Worker only runs first for /api/*;
+  // every other request is served straight from these files.
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"],
+    "not_found_handling": "404-page"
+  },
+
+  // Cloudflare Email Routing: sends booking requests to one verified address.
+  // The address must be a verified destination in Email Routing for heitenhaspel.nl.
+  "send_email": [
+    { "name": "BOOKING_EMAIL", "destination_address": "YOUR_PERSONAL_ADDRESS@example.com" }
+  ],
+
+  "vars": {
+    "MAIL_FROM": "boeke@heitenhaspel.nl",
+    "MAIL_TO": "YOUR_PERSONAL_ADDRESS@example.com"
+  },
+
+  // Secrets (not in this file):
+  //   npx wrangler secret put TURNSTILE_SECRET
+
+  "routes": [
+    { "pattern": "heitenhaspel.nl", "custom_domain": true },
+    { "pattern": "www.heitenhaspel.nl", "custom_domain": true }
+  ],
+
+  "observability": { "enabled": true }
+}
