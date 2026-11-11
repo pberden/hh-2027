@@ -1,0 +1,30 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<ul class:list={["socials", className]}>
+  <li>
+    <a class="tilt" href="https://www.instagram.com/dnheitenhaspel/" aria-label="Instagram" style="background: var(--pink)">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#1a0033" stroke-width="2.2" stroke-linecap="round">
+        <rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="#1a0033"></circle>
+      </svg>
+    </a>
+  </li>
+  <li>
+    <a class="tilt" href="https://www.facebook.com/heitenhaspel/" aria-label="Facebook" style="background: var(--acid)">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#1a0033" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V21M6 11h8"></path>
+      </svg>
+    </a>
+  </li>
+  <li>
+    <a class="tilt" href="https://twitter.com/heitenhaspel/" aria-label="X / Twitter" style="background: var(--orange)">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1a0033" stroke-width="2.4" stroke-linecap="round">
+        <path d="M4 4l16 16M20 4L4 20"></path>
+      </svg>
+    </a>
+  </li>
+</ul>

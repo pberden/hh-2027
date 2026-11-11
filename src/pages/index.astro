@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Socials from "../components/Socials.astro";
 import gigs from "../data/gigs.json";
 import videos from "../data/videos.json";
 
@@ -71,14 +72,18 @@ const slogans = ["Blief van mien beer", "Eine te weinig", "Ceci n'est pas un sax
           Gen optreeje is beej ós utzelfde. Weej zien ‘n bietje waus maar zoelang we wat te kleppe kriege merkse det neet.
         </p>
       </div>
+      <div class="wrap wie__socials">
+        <p>Volg ós</p>
+        <Socials class="socials--outlined" />
+      </div>
     </section>
 
     <!-- VIDEO -->
     <section id="video" class="section video">
       <div aria-hidden="true" class="video__sun sun"></div>
       <div class="wrap" style="position: relative">
-        <h2 class="groovy"><span class="melt">Kieke &amp; loestere</span></h2>
-        <p class="lead">Ein paar van os optreejes die op de film staon.</p>
+        <h2 class="groovy"><span class="melt">Kieke &amp; luustere</span></h2>
+        <p class="lead">Ein paar van ôs optreejes die op de film staon.</p>
 
         <ul class="video__grid" role="list" style="list-style: none; padding: 0">
           {
@@ -88,8 +93,8 @@ const slogans = ["Blief van mien beer", "Eine te weinig", "Ceci n'est pas un sax
                 <li>
                   {v.youtubeId ? (
                     <button type="button" class="vid tilt" data-youtube={v.youtubeId} data-title={v.titel}>
-                      <div class="vid__frame blob">
-                        <img class="hue" src={still} alt="" loading="lazy" />
+                      <div class="vid__frame">
+                        <div class="vid__clip"><img class="hue" src={still} alt="" loading="lazy" /></div>
                         <span class="vid__play">
                           <svg aria-hidden="true" viewBox="0 0 24 24" width="34" height="34">
                             <path d="M8 5v14l11-7z" fill="#1a0033" />
@@ -103,8 +108,8 @@ const slogans = ["Blief van mien beer", "Eine te weinig", "Ceci n'est pas un sax
                     </button>
                   ) : (
                     <div class="vid vid--soon">
-                      <div class="vid__frame blob">
-                        {still && <img class="hue" src={still} alt="" loading="lazy" />}
+                      <div class="vid__frame">
+                        <div class="vid__clip">{still && <img class="hue" src={still} alt="" loading="lazy" />}</div>
                         <span class="vid__play">binnen&shy;kort</span>
                       </div>
                       <p class="vid__title">{v.titel}</p>
@@ -164,7 +169,7 @@ const slogans = ["Blief van mien beer", "Eine te weinig", "Ceci n'est pas un sax
 
           <div class="full cf-turnstile" data-sitekey={turnstileSiteKey} data-language="nl"></div>
 
-          <button type="submit" class="form__submit tilt">Verstuur de vibes</button>
+          <button type="submit" class="form__submit tilt">Op good gelök!</button>
           <p id="boeke-status" class="form__status" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -179,29 +184,7 @@ const slogans = ["Blief van mien beer", "Eine te weinig", "Ceci n'est pas un sax
         <p>© 2003–{new Date().getFullYear()} Joekskepèl D'n Heiten Haspel<br />D'n Heiten Haspel — © Dit is ós eigedom. Asse ózze kóntent wils gebroëke laot ’t ós dan efkes weite. Helse dich d’r neet aan, dan weite weej dich te vinde jung. Vaerder alles palettie? Asse dit noow toch aan ’t laeze bis kinse net zoë good Vrind Van waere. Vastelaovend same!
 </p>
       </div>
-      <ul class="socials">
-        <li>
-          <a class="tilt" href="https://www.instagram.com/dnheitenhaspel/" aria-label="Instagram" style="background: var(--pink)">
-            <svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#1a0033" stroke-width="2.2" stroke-linecap="round">
-              <rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="#1a0033"></circle>
-            </svg>
-          </a>
-        </li>
-        <li>
-          <a class="tilt" href="https://www.facebook.com/heitenhaspel/" aria-label="Facebook" style="background: var(--acid)">
-            <svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#1a0033" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V21M6 11h8"></path>
-            </svg>
-          </a>
-        </li>
-        <li>
-          <a class="tilt" href="https://twitter.com/heitenhaspel/" aria-label="X / Twitter" style="background: var(--orange)">
-            <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1a0033" stroke-width="2.4" stroke-linecap="round">
-              <path d="M4 4l16 16M20 4L4 20"></path>
-            </svg>
-          </a>
-        </li>
-      </ul>
+      <Socials />
     </div>
   </footer>
 

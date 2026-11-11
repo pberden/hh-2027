@@ -212,13 +212,17 @@ h1, h2, h3 {
 .wie__row { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-end; justify-content: space-between; }
 .wie h2 { font-size: clamp(48px, 8vw, 112px); color: var(--white); }
 .wie p { margin: 0; max-width: 520px; font-size: 22px; font-weight: 500; }
+.wie__socials { margin-top: 56px; display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
+.wie__socials p { font-family: var(--display); font-size: 32px; color: var(--ink); }
+.socials--outlined a { border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); }
 
 /* ───────── video ───────── */
 
 .video { background: var(--violet); color: var(--white); }
 .video__sun {
-  position: absolute; right: -300px; top: -300px; width: 800px; height: 800px; border-radius: 50%;
-  background: repeating-conic-gradient(#5e2bff 0deg 10deg, var(--violet) 10deg 20deg);
+  /* Centred on the top-right corner; radius ≈ 90% of the viewport width */
+  position: absolute; right: -90vw; top: -90vw; width: 280vw; height: 180vw; border-radius: 50%;
+  background: repeating-conic-gradient(#7a52ff 0deg 10deg, var(--violet) 10deg 20deg);
 }
 .video h2 { font-size: clamp(48px, 8vw, 112px); color: var(--acid); }
 .video__grid {
@@ -226,11 +230,73 @@ h1, h2, h3 {
   grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
 }
 .vid { display: block; width: 100%; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+/* The frame draws the acid outline around whatever shape .vid__clip has
+   (a border would be cut off by clip-path, a drop-shadow follows the shape). */
 .vid__frame {
-  position: relative; aspect-ratio: 16 / 10; overflow: hidden;
-  border: 5px solid var(--acid); background: var(--ink);
+  position: relative; aspect-ratio: 16 / 10;
+  filter: drop-shadow(4px 0 0 var(--acid)) drop-shadow(-4px 0 0 var(--acid))
+          drop-shadow(0 4px 0 var(--acid)) drop-shadow(0 -4px 0 var(--acid));
 }
-.vid__frame img, .vid__frame iframe { width: 100%; height: 100%; object-fit: cover; display: block; border: 0; }
+.vid__clip { position: absolute; inset: 0; overflow: hidden; background: var(--ink); border-radius: 32px; }
+.vid__clip img, .vid__frame iframe { width: 100%; height: 100%; object-fit: cover; display: block; border: 0; }
+
+/* One organic shape per video (repeats after six). Browsers without
+   clip-path: shape() keep the rounded rectangle above. */
+@supports (clip-path: shape(from 0% 0%, line to 100% 100%)) {
+  .vid__clip { border-radius: 0; }
+
+  /* 1 · blob */
+  .video__grid li:nth-child(6n + 1) .vid__clip {
+    clip-path: shape(from 50% 2%, curve to 97% 40% with 85% 0% / 100% 18%, curve to 70% 97% with 94% 70% / 88% 100%,
+      curve to 6% 78% with 45% 94% / 12% 100%, curve to 18% 10% with 0% 50% / 0% 20%, curve to 50% 2% with 30% 3% / 40% 4%, close);
+  }
+
+  /* 2 · melting, dripping off the bottom */
+  .video__grid li:nth-child(6n + 2) .vid__clip {
+    clip-path: shape(from 0% 8%, curve to 50% 4% with 15% 0% / 35% 10%, curve to 100% 6% with 70% 0% / 85% 0%,
+      line to 100% 70%, curve to 88% 74% with 100% 75% / 92% 72%, curve to 84% 98% with 84% 80% / 90% 98%,
+      curve to 78% 72% with 78% 98% / 82% 76%, curve to 50% 76% with 70% 70% / 58% 72%,
+      curve to 44% 100% with 46% 82% / 50% 100%, curve to 36% 76% with 38% 100% / 40% 80%,
+      curve to 16% 72% with 30% 72% / 22% 70%, curve to 10% 90% with 12% 74% / 14% 90%,
+      curve to 4% 72% with 6% 90% / 6% 76%, curve to 0% 66% with 2% 70% / 0% 68%, close);
+  }
+
+  /* 3 · eye */
+  .video__grid li:nth-child(6n + 3) .vid__clip {
+    clip-path: shape(from 0% 50%, curve to 100% 50% with 25% -20% / 75% -20%, curve to 0% 50% with 75% 120% / 25% 120%, close);
+  }
+
+  /* 4 · sunburst */
+  .video__grid li:nth-child(6n + 4) .vid__clip {
+    clip-path: shape(from 50% 0%, line to 55.2% 10.3%, line to 62.9% 1.7%, line to 65.3% 13%, line to 75% 6.7%,
+      line to 74.4% 18.3%, line to 85.4% 14.6%, line to 81.7% 25.6%, line to 93.3% 25%, line to 87% 34.7%,
+      line to 98.3% 37.1%, line to 89.7% 44.8%, line to 100% 50%, line to 89.7% 55.2%, line to 98.3% 62.9%,
+      line to 87% 65.3%, line to 93.3% 75%, line to 81.7% 74.4%, line to 85.4% 85.4%, line to 74.4% 81.7%,
+      line to 75% 93.3%, line to 65.3% 87%, line to 62.9% 98.3%, line to 55.2% 89.7%, line to 50% 100%,
+      line to 44.8% 89.7%, line to 37.1% 98.3%, line to 34.7% 87%, line to 25% 93.3%, line to 25.6% 81.7%,
+      line to 14.6% 85.4%, line to 18.3% 74.4%, line to 6.7% 75%, line to 13% 65.3%, line to 1.7% 62.9%,
+      line to 10.3% 55.2%, line to 0% 50%, line to 10.3% 44.8%, line to 1.7% 37.1%, line to 13% 34.7%,
+      line to 6.7% 25%, line to 18.3% 25.6%, line to 14.6% 14.6%, line to 25.6% 18.3%, line to 25% 6.7%,
+      line to 34.7% 13%, line to 37.1% 1.7%, line to 44.8% 10.3%, close);
+  }
+
+  /* 5 · scalloped cloud */
+  .video__grid li:nth-child(6n + 5) .vid__clip {
+    clip-path: shape(from 6% 6%, curve to 23.6% 6% with 14.8% -4%, curve to 41.2% 6% with 32.4% -4%,
+      curve to 58.8% 6% with 50% -4%, curve to 76.4% 6% with 67.6% -4%, curve to 94% 6% with 85.2% -4%,
+      curve to 94% 35.3% with 102% 20.7%, curve to 94% 64.7% with 102% 50%, curve to 94% 94% with 102% 79.3%,
+      curve to 76.4% 94% with 85.2% 104%, curve to 58.8% 94% with 67.6% 104%, curve to 41.2% 94% with 50% 104%,
+      curve to 23.6% 94% with 32.4% 104%, curve to 6% 94% with 14.8% 104%, curve to 6% 64.7% with -2% 79.3%,
+      curve to 6% 35.3% with -2% 50%, curve to 6% 6% with -2% 20.7%, close);
+  }
+
+  /* 6 · lopsided amoeba */
+  .video__grid li:nth-child(6n) .vid__clip {
+    clip-path: shape(from 12% 20%, curve to 46% 8% with 20% 4% / 34% 14%, curve to 88% 4% with 60% 0% / 78% -2%,
+      curve to 96% 52% with 100% 12% / 88% 34%, curve to 80% 96% with 100% 72% / 96% 96%,
+      curve to 34% 86% with 64% 96% / 50% 80%, curve to 2% 70% with 16% 94% / 0% 90%, curve to 12% 20% with 4% 50% / 2% 32%, close);
+  }
+}
 .vid__play {
   position: absolute; inset: 0; margin: auto; width: 84px; height: 84px; border-radius: 50%;
   background: var(--pink); border: 4px solid var(--ink);
