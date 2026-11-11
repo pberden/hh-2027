@@ -2,24 +2,21 @@
 import Base from "../layouts/Base.astro";
 import gigs from "../data/gigs.json";
 import videos from "../data/videos.json";
-import sponsors from "../data/sponsors.json";
 
 // Public site key. Falls back to Cloudflare's always-passes test key for local dev.
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
 
-const slogans = ["Blief van mien beer", "Drink opfnie", "Ceci n'est pas un saxophone", "Alzelaeve kei gezellig"];
-const feesOptions = ["Vastelaovend", "Bruiloft", "Verjaordaag", "Bedrijfsfees", "Kroeg", "Iets wat neet besteit"];
+const slogans = ["Blief van mien beer", "Eine te weinig", "Ceci n'est pas un saxophone", "Alzelaeve kei gezellig", "Huuub", "Oke wat we gaon doon"];
 ---
 
 <Base>
   <nav class="nav" aria-label="Hoofdmenu">
     <a class="nav__home" href="#top">D'n Heiten Haspel</a>
     <ul class="nav__links">
-      <li><a class="pill--ink" href="#wie">Wie?</a></li>
+      <li><a class="pill--ink" href="#wie">Wae?</a></li>
       <li><a class="pill--pink" href="#video">Video's</a></li>
-      <li><a class="pill--orange" href="#gewaes">Gewaes</a></li>
+      <li><a class="pill--orange" href="#gewaes">Rifferensies</a></li>
       <li><a class="pill--violet" href="#boeke">Boeke</a></li>
-      <li><a class="pill--white" href="#vrinde">Vrinde</a></li>
     </ul>
   </nav>
 
@@ -54,7 +51,7 @@ const feesOptions = ["Vastelaovend", "Bruiloft", "Verjaordaag", "Bedrijfsfees", 
           </g>
         </svg>
       </div>
-      <p aria-hidden="true" class="sticker sticker--note float">Dees website is gemaak oonder invloed van 'n sousafoon.</p>
+      <p aria-hidden="true" class="sticker sticker--note float">D'n Heiten Haspel — © Dit is ós eigedom. Asse ózze kóntent wils gebroëke laot ’t ós dan efkes weite. Helse dich d’r neet aan, dan weite weej dich te vinde jung. Vaerder alles palettie? Asse dit noow toch aan ’t laeze bis kinse net zoë good Vrind Van waere. Vastelaovend same!</p>
     </header>
 
     <!-- MARQUEE -->
@@ -67,10 +64,11 @@ const feesOptions = ["Vastelaovend", "Bruiloft", "Verjaordaag", "Bedrijfsfees", 
     <!-- WIE -->
     <section id="wie" class="section wie">
       <div class="wrap wie__row">
-        <h2 class="groovy-l stroke"><span class="melt">Wie zien veer?</span></h2>
+        <h2 class="groovy-l stroke"><span class="melt">Wae zien weej ens eigenlijk?</span></h2>
         <p>
-          D'n Heiten Haspel is Venloos cultureel erfgoed. Net euver 't rendje, mer alzelaeve kei gezellig.
-          [ZIN OVER DE BAND, EEN OF TWEE REGELS.]
+          D'n Heiten Haspel is Venloos cultureel erfgoed. "Keeping the joeks alive". 
+
+          Gen optreeje is beej ós utzelfde. Weej zien ‘n bietje waus maar zoelang we wat te kleppe kriege merkse det neet.
         </p>
       </div>
     </section>
@@ -80,7 +78,7 @@ const feesOptions = ["Vastelaovend", "Bruiloft", "Verjaordaag", "Bedrijfsfees", 
       <div aria-hidden="true" class="video__sun sun"></div>
       <div class="wrap" style="position: relative">
         <h2 class="groovy"><span class="melt">Kieke &amp; loestere</span></h2>
-        <p class="lead">Vastelaovend in bewegend beeld. Neet geschik veur mense die zeekziek waere.</p>
+        <p class="lead">Ein paar van os optreejes die op de film staon.</p>
 
         <ul class="video__grid" role="list" style="list-style: none; padding: 0">
           {
@@ -123,8 +121,8 @@ const feesOptions = ["Vastelaovend", "Bruiloft", "Verjaordaag", "Bedrijfsfees", 
     <!-- GEWAES -->
     <section id="gewaes" class="section gewaes">
       <div class="wrap">
-        <h2 class="groovy stroke"><span class="melt">Waor veer al gewaes zien</span></h2>
-        <p class="lead">En waor veer neet meer welkom zien. [AANVULLEN]</p>
+        <h2 class="groovy stroke"><span class="melt">Gigografie</span></h2>
+        <p class="lead">Plekke wao we de boel op stelte hebbe gezatte</p>
         <ul class="gigs">
           {
             gigs.map((g, i) => (
@@ -144,8 +142,7 @@ const feesOptions = ["Vastelaovend", "Bruiloft", "Verjaordaag", "Bedrijfsfees", 
         <div class="boeke__intro">
           <h2 class="groovy"><span class="melt">Boeke!</span></h2>
           <p class="lead">
-            'n Fees, 'n optocht, 'n bruiloft of 'n kroeg die te stil is? Veer kómme blaoze. Of veer kómme te laat, mer veer
-            kómme.
+            Remmiedemmie nuudig? Vul dit formulier in.
           </p>
           <p class="boeke__kicker">Of mail drek</p>
           <a class="boeke__mail" href="mailto:info@heitenhaspel.nl">info@heitenhaspel.nl</a>
@@ -156,12 +153,6 @@ const feesOptions = ["Vastelaovend", "Bruiloft", "Verjaordaag", "Bedrijfsfees", 
           <label>E-mail<input type="email" name="email" autocomplete="email" required maxlength="200" /></label>
           <label>Datum<input type="date" name="datum" /></label>
           <label>Plaats<input type="text" name="plaats" maxlength="160" /></label>
-          <label class="full"
-            >Wat veur fees?
-            <select name="fees">
-              {feesOptions.map((o) => <option>{o}</option>)}
-            </select>
-          </label>
           <label class="full"
             >Bericht (of gewoon dien lievelingskleur)
             <textarea name="bericht" rows="4" maxlength="5000"></textarea>
@@ -179,51 +170,14 @@ const feesOptions = ["Vastelaovend", "Bruiloft", "Verjaordaag", "Bedrijfsfees", 
       </div>
     </section>
 
-    <!-- VRINDE + SPONSORS -->
-    <section id="vrinde" class="section">
-      <div class="wrap vrinde__row">
-        <div class="vrinde__card blob">
-          <h2 class="groovy-l stroke">Vrinde van</h2>
-          <p>
-            Wieës vrind van D'n Heiten Haspel veur minimaal <strong>€15 per jaor</strong>. Euvermake nao <strong
-              >[IBAN]</strong
-            > t.n.v. Joekskepèl D'n Heiten Haspel, mit dien naam, adres en e-mail.
-          </p>
-          <p class="small">Doorveur krieg se: eeuwige roem, 'n knik van de sousafoon en [AANVULLEN].</p>
-        </div>
-
-        <div class="sponsors">
-          <h2>Sponsors</h2>
-          <p>Hie kan dien logo smelte.</p>
-          <ul class="sponsors__grid">
-            {
-              sponsors.map((s) => {
-                const inner = s.logo ? <img src={s.logo} alt={s.naam} loading="lazy" /> : s.naam;
-                return (
-                  <li>
-                    {s.url ? (
-                      <a class="sponsor tilt" href={s.url} rel="noopener sponsored" target="_blank">
-                        {inner}
-                      </a>
-                    ) : (
-                      <div class="sponsor tilt">{inner}</div>
-                    )}
-                  </li>
-                );
-              })
-            }
-            <li><a class="sponsor sponsor--cta tilt" href="#boeke">Hie dien naam?</a></li>
-          </ul>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="footer">
     <div class="wrap footer__row">
       <div class="footer__brand">
         <img class="iri" src="/logo.png" width="322" height="354" alt="D'n Heiten Haspel" loading="lazy" />
-        <p>© 2003–{new Date().getFullYear()} Joekskepèl D'n Heiten Haspel<br />Ceci n'est pas un footer.</p>
+        <p>© 2003–{new Date().getFullYear()} Joekskepèl D'n Heiten Haspel<br />D'n Heiten Haspel — © Dit is ós eigedom. Asse ózze kóntent wils gebroëke laot ’t ós dan efkes weite. Helse dich d’r neet aan, dan weite weej dich te vinde jung. Vaerder alles palettie? Asse dit noow toch aan ’t laeze bis kinse net zoë good Vrind Van waere. Vastelaovend same!
+</p>
       </div>
       <ul class="socials">
         <li>

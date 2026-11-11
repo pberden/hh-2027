@@ -1,5 +1,5 @@
 import { EmailMessage } from "cloudflare:email";
-import { createMimeMessage } from "mimetext";
+import { createMimeMessage, Mailbox } from "mimetext";
 
 interface Env {
   ASSETS: Fetcher;
@@ -85,7 +85,7 @@ async function handleBooking(request: Request, env: Env): Promise<Response> {
     const msg = createMimeMessage();
     msg.setSender({ name: "Website D'n Heiten Haspel", addr: env.MAIL_FROM });
     msg.setRecipient(env.MAIL_TO);
-    msg.setHeader("Reply-To", booking.email);
+    msg.setHeader("Reply-To", new Mailbox({ addr: booking.email, name: booking.naam.replace(/["<>]/g, "") }));
     msg.setSubject(`Boekingsaanvraag: ${booking.fees || "fees"} – ${booking.datum || "datum onbekend"} – ${booking.naam}`);
     msg.addMessage({
       contentType: "text/plain",

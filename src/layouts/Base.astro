@@ -12,7 +12,7 @@ interface Props {
 
 const {
   title = "Joekskepèl D'n Heiten Haspel · Venlo",
-  description = "Joekskepèl D'n Heiten Haspel oet Venlo, sinds 2003. Net euver 't rendje, mer alzelaeve kei gezellig. Boek ós veur dien fees.",
+  description = "Website van Joekskepèl D'n Heiten Haspel oet Venlo. Neem contact met os op veur un optreeje, of kiek wannier we eurges speule.",
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -44,14 +44,6 @@ const ogImage = new URL("/logo.png", Astro.site);
   </head>
   <body>
     <slot />
-
-    <div class="trip" role="group" aria-label="Trip-snelheid">
-      <span class="trip__label" aria-hidden="true">Trip</span>
-      <button type="button" data-trip="mild" aria-pressed="false">mild</button>
-      <button type="button" data-trip="vol" aria-pressed="true">vol</button>
-      <button type="button" data-trip="overdosis" aria-pressed="false">overdosis</button>
-    </div>
-
     <script>
       import "../scripts/trip";
     </script>
