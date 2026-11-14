@@ -427,3 +427,31 @@ h1, h2, h3 {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* ───────── entry gate ───────── */
+
+.gate { display: none; }
+html.gated { overflow: hidden; }
+html.gated .gate {
+  position: fixed; inset: 0; z-index: 100;
+  display: grid; place-content: center; justify-items: center; gap: 18px;
+  padding: 16px; text-align: center; overflow: hidden;
+  background: var(--violet); color: var(--acid);
+}
+.gate__sun {
+  position: absolute; inset: -50%; z-index: -1;
+  background: repeating-conic-gradient(var(--violet) 0 10deg, var(--pink) 10deg 20deg);
+  opacity: 0.55;
+}
+.gate__title { margin: 0; font-family: var(--display); font-size: clamp(56px, 14vw, 140px); line-height: 0.95; }
+.gate__sub { margin: 0; max-width: 420px; font-size: 20px; font-weight: 700; }
+.gate__btn {
+  margin-top: 12px; padding: 26px 42px; border: 5px solid var(--ink); border-radius: 999px;
+  background: var(--acid); color: var(--ink);
+  font: 400 clamp(28px, 6vw, 44px) var(--display); cursor: pointer;
+  box-shadow: 8px 8px 0 var(--ink);
+  transition: transform 0.28s cubic-bezier(0.3, 1.8, 0.5, 1);
+}
+.gate__btn:active { box-shadow: 3px 3px 0 var(--ink); }
+.gate--open { animation: gate-out 0.45s ease-in forwards; }
+@keyframes gate-out { to { opacity: 0; transform: scale(1.4) rotate(8deg); } }
