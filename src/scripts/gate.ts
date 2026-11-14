@@ -7,7 +7,7 @@ const gate = document.querySelector<HTMLElement>(".gate");
 const btn = document.querySelector<HTMLButtonElement>("[data-gate]");
 
 // Labels shown after each dodge; once they run out the button gives up.
-const DODGE_LABELS = ["Mis!", "Hihi, nog ins?", "Bijnao...", "Good dan, drök mer"];
+const DODGE_LABELS = ["Mis!", "Hihi, schaele", "Bijna...", "Yurtas!"];
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (gate && btn && root.classList.contains("gated")) {
