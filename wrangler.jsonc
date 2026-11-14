@@ -17,12 +17,12 @@
   // Cloudflare Email Routing: sends booking requests to one verified address.
   // The address must be a verified destination in Email Routing for heitenhaspel.nl.
   "send_email": [
-    { "name": "BOOKING_EMAIL", "destination_address": "YOUR_PERSONAL_ADDRESS@example.com" }
+    { "name": "BOOKING_EMAIL", "destination_address": "paulberden@gmail.com" }
   ],
 
   "vars": {
     "MAIL_FROM": "boeke@heitenhaspel.nl",
-    "MAIL_TO": "YOUR_PERSONAL_ADDRESS@example.com"
+    "MAIL_TO": "paulberden@gmail.com"
   },
 
   // Secrets (not in this file):
