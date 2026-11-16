@@ -16,7 +16,7 @@ function say(text: string, state: "ok" | "error" | "busy") {
 }
 
 if (new URLSearchParams(location.search).has("fout")) {
-  say("Dao gieng get mis. Probeer 't nog ins, of mail info@heitenhaspel.nl.", "error");
+  say("Dao ging wat mis. Probeer 't nog ens, of mail info@heitenhaspel.nl.", "error");
 }
 
 form?.addEventListener("submit", async (event) => {
@@ -36,12 +36,12 @@ form?.addEventListener("submit", async (event) => {
 
     if (res.ok && data.ok) {
       form.reset();
-      say("Ontvange! Veer kómme drek bie dich trök. Of later. Mer veer kómme.", "ok");
+      say("Ontvange! Ut deurt gemiddeld 11 werkdaag veurdat we reagere", "ok");
     } else {
-      say(data.error ?? "Dao gieng get mis. Probeer 't nog ins.", "error");
+      say(data.error ?? "Dao ging wat mis. Probeer 't nog ens.", "error");
     }
   } catch {
-    say("Gein verbinding. Probeer 't nog ins, of mail info@heitenhaspel.nl.", "error");
+    say("Gen verbinding. Probeer 't nog ens, of mail info@heitenhaspel.nl.", "error");
   } finally {
     submit?.removeAttribute("disabled");
     window.turnstile?.reset();
