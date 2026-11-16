@@ -29,8 +29,12 @@ body {
   font-family: var(--body);
   font-size: 18px;
   line-height: 1.5;
-  overflow-x: hidden;
+  overflow-x: clip; /* clip, not hidden: hidden would break the sticky nav */
 }
+
+/* Oversized/rotated decorations (hero sun, tilted marquee) must not widen the
+   page; mobile Safari ignores body overflow-x, so clip here. */
+main { overflow-x: clip; }
 
 img { max-width: 100%; }
 a { color: var(--ink); }
@@ -112,21 +116,52 @@ h1, h2, h3 {
 /* ───────── nav ───────── */
 
 .nav {
-  position: relative; z-index: 5;
-  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;
-  padding: 20px clamp(16px, 4vw, 48px);
+  position: sticky; top: 0; z-index: 30;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 4px clamp(16px, 4vw, 48px);
+  background: var(--ink);
+  border-bottom: 4px solid var(--pink);
 }
-.nav__home { font-family: var(--display); font-size: 24px; text-decoration: none; }
-.nav__links { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.nav__home {
+  flex-shrink: 0; color: var(--acid);
+  font-family: var(--display); font-size: 24px; text-decoration: none;
+}
+.nav__home:hover { color: var(--pink); }
+.nav__links {
+  display: flex; gap: 10px; margin: 0; padding: 12px 4px; list-style: none;
+  overflow-x: auto; scrollbar-width: none;
+}
+.nav__links::-webkit-scrollbar { display: none; }
 .nav__links a {
   display: inline-block; padding: 10px 18px; border-radius: 999px;
-  text-decoration: none; font-weight: 700;
+  text-decoration: none; font-weight: 700; white-space: nowrap;
   animation: wander calc(var(--spd) * 4s) ease-in-out infinite;
 }
+/* Hold still while being aimed at, and mark the section you're in. */
+.nav__links a:hover,
+.nav__links a:focus-visible,
+.nav__links a:active,
+.nav__links a[aria-current] { animation-play-state: paused; }
+.nav__links a[aria-current] { box-shadow: 0 0 0 3px var(--ink), 0 0 0 6px var(--acid); }
 .nav__links li:nth-child(2) a { animation-delay: -1s; }
 .nav__links li:nth-child(3) a { animation-delay: -2s; }
 .nav__links li:nth-child(4) a { animation-delay: -3s; }
 .nav__links li:nth-child(5) a { animation-delay: -1.5s; }
+
+@media (max-width: 640px) {
+  .nav { padding-inline: 12px; }
+  /* the hero already shows the logo; give the pills the whole bar */
+  .nav__home { display: none; }
+  .nav__links a { padding: 8px 14px; font-size: 15px; }
+  /* Boeke stays in view even when the row scrolls sideways */
+  .nav__links li:last-child {
+    position: sticky; right: 0; padding-left: 6px;
+    background: var(--ink); box-shadow: -12px 0 12px var(--ink);
+  }
+}
+
+/* land section headings below the sticky bar */
+main [id] { scroll-margin-top: var(--nav-h, 80px); }
 
 .pill--ink { background: var(--ink); color: var(--acid) !important; }
 .pill--pink { background: var(--pink); color: var(--ink) !important; }
